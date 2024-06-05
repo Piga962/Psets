@@ -1,9 +1,17 @@
+import { useState } from "react";
 import { CiHome } from "react-icons/ci";
 import { useNavigate } from "react-router";
 
-const NavigationBar = ({children}) => {
+const NavigationBar = ({children, onFilter}) => {
+
+    const [filter, setFilter] = useState('');
 
     const navigate = useNavigate();
+
+    const handleFilterChange = (e) => {
+        setFilter(e.target.value);
+        onFilter(e.target.value);
+    }
 
     const handleNavigate = (route) =>{
         navigate('/'+route);
@@ -26,7 +34,11 @@ const NavigationBar = ({children}) => {
             width: '80px', 
             borderRadius:'10px'
             }}
-            type='text' placeholder="Filtrar por nombre"/>
+            type='text' 
+            placeholder="Filtrar por nombre"
+            value={filter}
+            onChange={handleFilterChange}
+            />
         </div>
         <p>Dashboard</p>
         {children}
