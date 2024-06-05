@@ -48,7 +48,7 @@ const Users = () => {
         }
         setIsLoading(true);
         try{
-            const response = await fetch('http://localhost:3003/chat', {
+            const response = await fetch('http://localhost:3003/chat/gemini', {
                 method: 'POST', 
                 headers: {'Content-Type': 'application/json'}, 
                 body: JSON.stringify(prompt),
@@ -121,7 +121,7 @@ const Users = () => {
                         onClick={handleGenerateHelp} 
                         >
                             <p>
-                                {isLoading ? 'Cargando': 'Generar Ejercicio'}
+                                {isLoading ? 'Cargando': 'Generar Respuesta'}
                             </p>
                         </button>
                         <button 

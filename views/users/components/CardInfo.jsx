@@ -1,4 +1,4 @@
-import userImage from '../../../xd.jpeg';
+import userImage from '../../../user.jpeg';
 
 const CardInfo = ({user}) => {
     return (
