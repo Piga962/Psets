@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import userImage from '../../../user.jpeg';
+import userImage from '../../../xd.jpeg';
+import './Card.css'; // Import the CSS file
 
 const Card = ({ user }) => {
     const navigate = useNavigate();
@@ -11,24 +12,12 @@ const Card = ({ user }) => {
     }
 
     return (
-        <div
-            style={{
-                width: '230px',
-                height: '60px',
-                border: 'solid black 2px',
-                borderRadius: '5px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                cursor: 'pointer'
-            }}
-            onClick={handleClick}
-        >
-            <div>
-                <img src={userImage} width={50} height={50} alt="user" />
+        <div className="card-container" onClick={handleClick}>
+            <div className="card-image">
+                <img src={userImage} alt="user" />
             </div>
 
-            <div style={{ textAlign: 'center', marginLeft: '10px' }}>
+            <div className="card-content">
                 <div>{user.name}</div>
                 <div>{user.email}</div>
             </div>

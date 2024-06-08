@@ -1,0 +1,46 @@
+/* Form.css */
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+    background-color: #2e2e2e; /* Dark background for casino feel */
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #ffd700; /* Gold border for casino feel */
+    box-shadow: 10px 10px 20px #1b1b1b, -10px -10px 20px #323232;
+    color: #fff; /* White text */
+}
+
+.form-title {
+    text-align: center;
+    color: #ffd700; /* Gold text */
+}
+
+.casino-input {
+    height: 35px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #444; /* Darker input background */
+    color: #fff; /* White text */
+}
+
+.casino-button {
+    height: 35px;
+    width: 100%;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.casino-button:hover {
+    background-color: #0056b3;
+}

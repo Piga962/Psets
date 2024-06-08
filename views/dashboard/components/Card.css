@@ -1,0 +1,31 @@
+/* Card.css */
+
+.card-container {
+    width: 230px;
+    height: 80px;
+    border: 2px solid #ffd700; /* Gold border for casino feel */
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(145deg, #1b1b1b, #323232);
+    box-shadow: 10px 10px 20px #1b1b1b, -10px -10px 20px #323232;
+    color: #fff; /* White text */
+}
+
+.card-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3); /* Gold shadow for hover effect */
+}
+
+.card-image img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.card-content {
+    text-align: center;
+}

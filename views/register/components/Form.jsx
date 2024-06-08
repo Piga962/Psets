@@ -1,7 +1,7 @@
 import { useState } from "react";
+import './Form.css'; // Import the CSS file
 
 const Form = () => {
-
     const [form, setForm] = useState({
         userName: '',
         userEmail: '',
@@ -21,7 +21,7 @@ const Form = () => {
 
     const handleSubitForm = async(e) => {
         e.preventDefault();
-        try{
+        try {
             const res = await fetch('http://localhost:3003/users', {
                 method: 'POST',
                 headers: {
@@ -29,32 +29,64 @@ const Form = () => {
                 },
                 body: JSON.stringify(form),
             });
-            return res.status === 200? alert('Registro existoso') : alert('Error al registrar');
-        } catch (error){
+            return res.status === 200 ? alert('Registro exitoso') : alert('Error al registrar');
+        } catch (error) {
             alert('Error al registrar');
             console.log(error);
         }
     }
 
     return (
-        <div>
-            <h1>Form</h1>
+        <div className="form-container">
+            <h1 className="form-title">Form</h1>
             <form>
-                <input style={{height: '25px', paddingLeft:'5px'}}type="text" name="name" placeholder="Name" onChange={(handleChange)}/>
-
-                <input style={{height:'25px', paddingLeft:'5px'}}  type="text" name="email" placeholder="Email" onChange={(handleChange)}/>
-
-                <input style={{height:'25px', paddingLeft:'5px'}}  type="int" name="age" placeholder="Age" onChange={(handleChange)}/>
-
-                <input style={{height:'25px', paddingLeft:'5px'}}  type="text" name="address" placeholder="Address" onChange={(handleChange)}/>
-
-                <input style={{height:'25px', paddingLeft:'5px'}}  type="text" name="gender" placeholder="Gender" onChange={(handleChange)}/>
-
-                <input style={{height:'25px', paddingLeft:'5px'}}  type="int" name="heigth" placeholder="Heigth" onChange={(handleChange)}/>
-
-
-                <button style={{height:'35px', width:'120px', backgroundColor:'blue', color: 'white', borderRadius:'5px', border: 'none', type:'Submit'}}
-                onClick={handleSubitForm}> 
+                <input 
+                    className="casino-input"
+                    type="text" 
+                    name="userName" 
+                    placeholder="Name" 
+                    onChange={handleChange}
+                />
+                <input 
+                    className="casino-input"
+                    type="text" 
+                    name="userEmail" 
+                    placeholder="Email" 
+                    onChange={handleChange}
+                />
+                <input 
+                    className="casino-input"
+                    type="number" 
+                    name="userAge" 
+                    placeholder="Age" 
+                    onChange={handleChange}
+                />
+                <input 
+                    className="casino-input"
+                    type="text" 
+                    name="userAddress" 
+                    placeholder="Address" 
+                    onChange={handleChange}
+                />
+                <input 
+                    className="casino-input"
+                    type="text" 
+                    name="userGender" 
+                    placeholder="Gender" 
+                    onChange={handleChange}
+                />
+                <input 
+                    className="casino-input"
+                    type="number" 
+                    name="userHeight" 
+                    placeholder="Height" 
+                    onChange={handleChange}
+                />
+                <button 
+                    className="casino-button submit-button"
+                    type="submit"
+                    onClick={handleSubitForm}
+                >
                     Registrar
                 </button>
             </form>

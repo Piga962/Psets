@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from './components/Card';
 import NavigationBar from "../../src/shared/NavigationBar";
+import './Dashboard.css';  // Import the CSS file
 
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
@@ -13,37 +14,24 @@ const Dashboard = () => {
         console.log(data);
     }
 
-    const handleFilterChange = (filterValue) => {
-        setFilter(filterValue);
-    };
-
-    const filteredUsers = users.filter(user =>
-        user.name && user.name.toLowerCase().includes(filter.toLowerCase())
-    );
-    
     useEffect(() => {
         fetchUsers();
     }, []);
 
     const handleFilterChange = (filterValue) => {
         setFilter(filterValue);
+        console.log(filterValue);
     };
 
     const filteredUsers = users.filter(user =>
-        user.name.toLowerCase().includes(filter.toLowerCase())
+        user.name && user.name.toLowerCase().includes(filter.toLowerCase())
     );
 
     return (
         <NavigationBar onFilter={handleFilterChange}>
-<<<<<<< HEAD
-            <div style={{display:'flex', flexDirection: 'column'}}>
+            <div className="dashboard-container">
                 {filteredUsers.map((user) => (
-                    <div key={user.id} style={{padding: '2%'}}>
-=======
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {filteredUsers.map((user) => (
-                    <div key={user.id} style={{ padding: '2%' }}>
->>>>>>> eddacfd0fca1fbecf6dc9de46a01aadcf6158ba0
+                    <div key={user.id} className="card-wrapper">
                         <Card user={user} />
                     </div>
                 ))}
