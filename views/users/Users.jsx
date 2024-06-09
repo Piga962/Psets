@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from 'axios';
+
 import NavigationBar from "../../src/shared/NavigationBar";
 import PrevDescription from "./components/PrevDescription";
 import CardInfo from "./components/CardInfo";
@@ -17,6 +19,8 @@ const Users = () => {
     
     const [isLoading, setIsLoading] = useState(false);
     const [descriptions, setDescriptions] = useState([]);
+    const [selectedFile, setSelectedFile] = useState(null); // state for the selected file
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -26,7 +30,6 @@ const Users = () => {
     const fetchDescription = async () => {
         const response = await fetch(`http://localhost:3003/description/${id}`);
         const data = await response.json();
-        console.log(data);
         setDescriptions(data);
     };
 
@@ -36,27 +39,36 @@ const Users = () => {
         setUser(data);
     };
 
-    const handleGenerateHelp = async () => {
-        const prompt = { prompt: form.description };
+    function handleGenerateHelp() {
+        const prompt = form.description;
         setIsLoading(true);
-        try {
-            const response = await fetch('http://localhost:3003/chat/gemini', {
-                method: 'POST', 
-                headers: { 'Content-Type': 'application/json' }, 
-                body: JSON.stringify(prompt),
-            });
-            const data = await response.json();
-            setForm({ ...form, prescription: data.response });
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
-        setIsLoading(false);
+
+        fetch(`http://localhost:3003/chat/context?message=${prompt}`).then((res) => res.json()).then((answer) => { 
+            setForm({ ...form, prescription: answer.response });
+            setIsLoading(false);
+        }).catch((error) => {
+            console.log('Error:', error);
+            setIsLoading(false);
+        });
     };
+
+    const handleFileUpload = () => {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        axios.post('http://localhost:3003/chat/upload', formData)
+        .then((response) => {
+            console.log(response.data);
+            alert('Archivo subido correctamente');
+        })
+        .catch((error) =>{
+            console.log("Error al subir el archivo", error);
+            alert('Error al subir el archivo')
+        });
+    }
 
     const createDescription = async (e) => {
         e.preventDefault();
-        console.log(form);
         try {
             const response = await fetch(`http://localhost:3003/description/${id}`, {
                 method: 'POST',
@@ -121,6 +133,18 @@ const Users = () => {
                                     Subir
                                 </button>
                             </div>
+                            <input
+                                type="file"
+                                onChange={(e) => setSelectedFile(e.target.files[0])}
+                                className="file-input"
+                            />
+                            <button
+                                className="casino-button upload-button"
+                                onClick={handleFileUpload}
+                                disabled={!selectedFile}
+                            >
+                                Upload File
+                            </button>
                         </div>
                     </div>
                 </div>
